@@ -1,0 +1,33 @@
+import modules ;
+import path ;
+
+project upx_test
+    : requirements
+    : usage-requirements
+    : default-build
+      debug
+      <debug-symbols>on
+    : build-dir
+      bin
+    ;
+
+exe main
+  : main_dlopen.cpp
+    dynamic_loading
+  :
+  ;
+
+lib exception
+  :
+    exception_lib/make_lib_more_than_4k.cpp
+    exception_lib/call_exception_func.cpp
+    exception_lib/exception_fun.cpp
+  :
+  ;
+
+lib dynamic_loading : : <name>dl ;
+
+lib exception_so_file
+  :
+  : <file>bin/gcc-gnu-4.8.5/debug/libexception.so
+  ;
